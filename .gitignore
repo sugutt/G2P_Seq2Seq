@@ -106,6 +106,7 @@ poetry.lock
 data/
 outputs/
 models/
+processed_data/
 
 # OS files
 .DS_Store
