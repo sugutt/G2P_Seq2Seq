@@ -1,0 +1,9 @@
+transformers
+datasets
+accelerate
+evaluate
+python-Levenshtein
+torch
+wandb
+jiwer
+tdqm
