@@ -85,6 +85,14 @@ class Vocabulary:
         self.eos_idx = self.token2index['<EOS>']
         self.unk_idx = self.token2index['<UNK>']
 
+    def to_index(self, token):
+        """Returns the index for a given token, defaulting to the UNK_TOKEN index."""
+        return self.token2index.get(token, self.unk_idx)
+
+    def to_token(self, index):
+        """Returns the token for a given index."""
+        return self.index2token.get(index, '<UNK>')
+
 class G2PTestDataset:
     """Simple loader for the test dataset."""
     def __init__(self, data_path):
@@ -138,10 +146,8 @@ def run_evaluation(model, test_dataset, source_vocab, target_vocab, device, max_
         predictions.append(prediction)
 
     # Calculate metrics using jiwer
-    error_metrics = jiwer.compute_measures(ground_truths, predictions)
-    wer = error_metrics['wer']
-    cer = error_metrics['cer']
-    
+    wer = jiwer.wer(ground_truths, predictions)
+    cer = jiwer.cer(ground_truths, predictions)
     return wer, cer, ground_truths, predictions
 
 

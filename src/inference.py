@@ -87,6 +87,14 @@ class Vocabulary:
         self.eos_idx = self.token2index['<EOS>']
         self.unk_idx = self.token2index['<UNK>']
 
+    def to_index(self, token):
+        """Returns the index for a given token, defaulting to the UNK_TOKEN index."""
+        return self.token2index.get(token, self.unk_idx)
+
+    def to_token(self, index):
+        """Returns the token for a given index."""
+        return self.index2token.get(index, '<UNK>')
+
 # --- 2. Prediction Function ---
 
 def predict(model, word, source_vocab, target_vocab, device, max_len=50):
